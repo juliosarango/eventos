@@ -1,3 +1,7 @@
+# eventos
+
+Django app 
+
 ## Tablas
 
 eventos:
