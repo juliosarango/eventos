@@ -10,7 +10,7 @@ services:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups
     env_file:
-      - ./.envs/.local/.postgres
+      - .env
     ports:
       - "5432:5432"
     networks:
@@ -30,5 +30,5 @@ networks:
   eventos:
     ipam:
       config:
-        - subnet: 20.10.10.0/24
-          gateway: 20.10.10.1
+        - subnet: 30.10.10.0/24
+          gateway: 30.10.10.1
