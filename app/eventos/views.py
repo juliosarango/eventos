@@ -12,13 +12,13 @@ class EventoNuevo(LoginRequiredMixin, CreateView):
     def post(self, request, *args, **kwargs):
         initial = {}
 
-        form = self.form_class(request.POST or None, initial=initial)
+        form = self.form_class(request.POST, request.FILES)
         print(form.is_valid())
         print(form.errors)
         context = {"form": form}
         if form.is_valid():
-            user = request.user
-            estado_publicacion = True if request.POST["numero_boletos"] < 500 else False
+            user = request.user            
+            estado_publicacion = True if (int(request.POST["cantidad_boletos"]) < 500) else False
 
             evento = form.save(commit=False)
             evento.publicado = estado_publicacion

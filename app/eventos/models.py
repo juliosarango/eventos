@@ -43,7 +43,7 @@ class Evento(models.Model):
         help_text="Fecha y hora del evento",
     )
     valor = models.FloatField()
-    arte = models.ImageField(upload_to=path_to_upload)
+    arte = models.ImageField(upload_to="artes/%Y-%m-%d")
     estado = models.BooleanField(default=True)
     publicado = models.BooleanField(default=False)
     tipo = models.ForeignKey(
