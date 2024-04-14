@@ -1,0 +1,43 @@
+{% load static %}
+<section class="banner-section">
+        <div class="swiper-container banner-slider">
+            <div class="swiper-wrapper">
+                <!-- Slide Item -->
+                <div class="swiper-slide" style="background-image: url(assets/images/main-slider/image-1.jpg);">
+                    <div class="content-outer">
+                        <div class="content-box justify-content-center">
+                            <div class="inner text-center">
+                                <h1>Helping You To Make <br> Yourself An Expert Driver</h1>
+                                <div class="text">Mod tempor incididunt ut laboret dolore magna aliqua tenim <br>
+                                    adnim veniam quis nostrud exercitation ullamco.
+                                    </div>
+                                <div class="link-box">
+                                    <a href="{% url 'course_list' %}" class="theme-btn btn-style-one"><span>Ver cursos</span></a>                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide Item -->
+                <div class="swiper-slide" style="background-image: url(assets/images/main-slider/image-2.jpg);">
+                    <div class="content-outer">
+                        <div class="content-box">
+                            <div class="inner">
+                                <h1>Individually Tailored Driving <br> Programs Based On Skills</h1>
+                                <div class="text">Mod tempor incididunt ut laboret dolore magna aliqua tenim <br>
+                                    adnim veniam quis nostrud exercitation ullamco.
+                                    </div>
+                                <div class="link-box">
+                                    <a href="{% url 'course_list' %}" class="theme-btn btn-style-one"><span>Ver cursos</span></a>
+                                </div>
+                            </div>                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="banner-slider-nav">
+            <div class="banner-slider-control banner-slider-button-prev"><span><i class="flaticon-left-arrow"></i></span></div>
+            <div class="banner-slider-control banner-slider-button-next"><span><i class="flaticon-left-arrow"></i></span> </div>
+        </div>
+    </section>

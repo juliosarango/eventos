@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rifas y Eventos</title>
+    {% load static %}
+    <!-- Stylesheets -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- Responsive File -->
+    <link href="{% static 'css/responsive.css' %} " rel="stylesheet">
+    <!-- Color File -->
+    <link href="{% static 'css/color.css' %}" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+</head>
+<body>
+  <div class="page-wrapper">    
+    <!-- Preloader -->
+    
+    {% include 'sections/header.html' %}    
+
+    {% block content %}
+    {%  endblock %} 
+
+    {% include 'sections/footer.html' %}
+  </div>  
+</body>
+</html>

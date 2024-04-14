@@ -1,42 +1,52 @@
-<form method="POST" action="{% url 'eventos:nuevo' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">Organizadpr</label>
-        {{ form.organizador }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">descripcion</label>
-        {{ form.descripcion }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">fecha_hora</label>
-        {{ form.fecha_hora }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">direccion</label>
-        {{ form.direccion }}
-    </div>
+{% extends "base.html" %}
+{% load static %}
 
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">valor</label>
-        {{ form.valor }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">cantidad_boletos</label>
-        {{ form.cantidad_boletos }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">tipo</label>
-        {{ form.tipo }}
-    </div>
-    <div class="form-group">
-        <label class="text-primary text-dark font-weight-bold">arte</label>
-        {{ form.arte }}
-    </div>
+{% block content %}
 
-   
+<div class="row">
+    <div class="col-8">
+        <form method="POST" action="{% url 'eventos:nuevo' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Organizador</label>
+                {{ form.organizador }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Descripci&oacute;n</label>
+                {{ form.descripcion }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Fecha y hora del evento</label>
+                {{ form.fecha_hora }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Direcci&oacute;n</label>
+                {{ form.direccion }}
+            </div>
+        
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Valor</label>
+                {{ form.valor }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Cantidad de boletos</label>
+                {{ form.cantidad_boletos }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Tipo de evento</label>
+                {{ form.tipo }}
+            </div>
+            <div class="form-group">
+                <label class="text-primary text-dark font-weight-bold">Afiche del evento</label>
+                {{ form.arte }}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary btn-lg">Crear evento</button>
+        </form>
 
+    </div>
+    <div class="col-4"></div>
+</div>
 
-    <br>
-    <button type="submit" class="btn btn-primary btn-lg">crear</button>
-</form>
+{% endblock %}
+

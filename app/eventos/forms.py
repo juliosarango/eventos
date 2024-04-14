@@ -11,6 +11,8 @@ class EventoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["tipo"].queryset = TipoEvento.objects.filter(estado=True)
+        for myField in self.fields:
+            self.fields[myField].widget.attrs['class'] = 'form-control'
 
     class Meta:
         model = Evento
