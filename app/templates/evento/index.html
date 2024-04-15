@@ -1,0 +1,27 @@
+<h2>Eventos</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Organizador</td>
+            <td>Fecha</td>
+            <td>Dirección</td>            
+            <td>Cantidad Boletos</td>
+            <td>Costo Boletos</td>
+            <td>Estado</td>
+            <td>Ingresar</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for evento in eventos %}
+            <tr>
+                <td>{{evento.organizador}}</td>
+                <td>{{evento.fecha_hora}}</td>
+                <td>{{evento.direccion}}</td>
+                <td>{{evento.cantidad_boletos}}</td>
+                <td>{{evento.valor}}</td>
+                <td>{{evento.estado}}</td>
+                <td><a href="{% url 'eventos:detalle' evento.reference  %}">Ver detalles</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>    
+</table>

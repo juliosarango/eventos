@@ -8,8 +8,18 @@ app_name = "eventos"
 
 urlpatterns = [
     path(
+        "",
+        views.ListarEvento.as_view(),
+        name="index-eventos",
+    ),
+    path(
         "nuevo",
-        views.EventoNuevo.as_view(),
+        views.CrearEvento.as_view(),
         name="nuevo",
+    ),
+    path(
+        "detalle/<uuid:reference>",
+        views.DetalleEvento.as_view(),
+        name="detalle",
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

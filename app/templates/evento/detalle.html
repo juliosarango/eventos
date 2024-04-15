@@ -1,0 +1,39 @@
+<h2>Eventos</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Organizador</td>
+            <td>Fecha</td>
+            <td>Dirección</td>            
+            <td>Cantidad Boletos</td>
+            <td>Costo Boletos</td>
+            <td>Estado</td>            
+        </tr>
+    </thead>
+    <tbody>        
+        <tr>
+            <td>{{evento.organizador}}</td>
+            <td>{{evento.fecha_hora}}</td>
+            <td>{{evento.direccion}}</td>
+            <td>{{evento.cantidad_boletos}}</td>
+            <td>{{evento.cantidad_boletos}}</td>
+            <td>{{evento.costo}}</td>
+            <td>{{evento.estado}}</td>                
+        </tr>
+    </tbody>
+    
+</table>
+
+<h2>Vendedores</h2>
+<ul>
+{% for vendedor in vendedores %}
+    <li>{{vendedor.usuario.email}}</li>
+{% endfor %}
+</ul>
+
+<h2>Boletos</h2>
+<ul>
+    {% for boleto in boletos %}
+        <li>{{boleto.numero}} - {{ boleto.estado }}</li>
+    {% endfor %}
+    </ul>

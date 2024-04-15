@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import models
 from django.conf import settings
+import uuid
 
 
 class TipoEvento(models.Model):
@@ -28,6 +29,8 @@ class Evento(models.Model):
 
     def path_to_upload(instance, filename):
         return "user_{0}_{1}".format(instance.user.id, filename)
+
+    reference = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
 
     organizador = models.CharField(max_length=500, null=False)
     descripcion = models.TextField()
@@ -69,3 +72,50 @@ class Evento(models.Model):
         verbose_name_plural = "Eventos"
         ordering = ["-fecha_registro"]
         db_table = "eventos"
+
+
+class Vendedor(models.Model):
+    evento = models.ForeignKey(
+        Evento,
+        on_delete=models.CASCADE,
+        null=False,
+    )
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=False,
+    )
+    estado = estado = models.BooleanField(default=True)
+    fecha_registro = models.DateTimeField(
+        "fecha registro",
+        null=False,
+        auto_now_add=True,
+        help_text="Fecha registro",
+    )
+
+    class Meta:
+        verbose_name = "Vendedor"
+        verbose_name_plural = "Vendedores"
+        ordering = ["id"]
+        db_table = "vendedor"
+
+
+class Boletos(models.Model):
+    evento = models.ForeignKey(
+        Evento,
+        on_delete=models.CASCADE,
+        null=False,
+    )
+    numero = models.PositiveIntegerField(default=0)
+    fecha_registro = models.DateTimeField(
+        "fecha registro",
+        null=False,
+        auto_now_add=True,
+        help_text="Fecha registro",
+    )
+
+    class Meta:
+        verbose_name = "Boleto"
+        verbose_name_plural = "Boletos"
+        ordering = ["id"]
+        db_table = "boletos"
