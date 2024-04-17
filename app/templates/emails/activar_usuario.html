@@ -1,0 +1,16 @@
+{% autoescape off%}
+
+Bienvenido(a)</b> <br/><br/>
+
+Su cuenta ha sido creada correctamente.<br/><br/>
+
+<b>Para activar su cuenta, haga click en <a href="{{ protocol }}://{{ domain }}{% url 'users:activate' uidb64=uid token=token %}">"ACTIVAR MI CUENTA"</a></b>
+<br/><br/><br/>
+
+Estamos seguros que esta aplicación te ayudará en la planificación de tus Eventos<br/><br/><br/><br/>
+
+Atentamente,<br/>
+Tus amigos de <b>Rifas y Eventos</b><br/><br/>
+Nota: Este correo es generado automáticamente, por favor no lo responda.
+
+{% endautoescape %}

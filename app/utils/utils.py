@@ -19,3 +19,12 @@ class Utils:
             )
 
         boleto.save()
+
+
+class NotificacionesEmail:
+    datos = {
+        "REGISTRO_EXITOSO": {
+            "subject": "Registro correcto, bienvenido!",
+            "template": "emails/activar_usuario.html",
+        }
+    }

@@ -24,4 +24,9 @@ urlpatterns = [
         views.logout_user,
         name="logout",
     ),
+    path(
+        "activate/<uidb64>/<token>/",
+        views.activar_usuario,
+        name="activate",
+    ),
 ]

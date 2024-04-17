@@ -23,3 +23,8 @@ Tipo:
 - descripción
 - estado
 - fecha_registro
+
+## Ejecutar Celery
+```
+python -m celery -A taskapp worker
+```

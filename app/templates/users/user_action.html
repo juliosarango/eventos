@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta %}
+{{ block.super }}
+<meta http-equiv="refresh" content="15; url={% url 'users:home' %}" />
+{% endblock meta %}
+
+{% block css %}
+{{ block.super }}
+<style>
+  .my-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+{% endblock css %}
+
+{% block content %}
+<div id="msform">
+  {% csrf_token %}
+  <fieldset>
+    <div class="container">
+      <div class="alert alert-warning fs-alerta" role="alert">
+        {{message}}
+      </div>
+      <div class="my-center">
+        <a href="{% url 'users:home' %}" class="btn btn-success">Ingresar</a>
+      </div>
+    </div>
+  </fieldset>
+</div>
+{% endblock content %}

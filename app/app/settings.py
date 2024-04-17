@@ -123,7 +123,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Static files
 STATIC_URL = "static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -136,3 +145,18 @@ AUTH_USER_MODEL = "users.User"
 # Media
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
+
+
+# Email
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "30.10.10.42"
+EMAIL_PORT = 1025
+EMAIL_FROM = "info@test.com"
+
+
+DOMAIN = "localhost:8000"
+SITE_NAME = "Rifas y Eventos"
+PROTOCOL = "http"
+
+CELERY_BROKER_URL = "redis://30.10.10.41:6379"
+CELERY_RESULT_BACKEND = "redis://30.10.10.41:6379"

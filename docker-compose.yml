@@ -20,11 +20,20 @@ services:
   smtp-server:
     image: mailhog/mailhog
     ports:
-      - '1025'
-      - '8025'
+      - '1025:1025'
+      - '8025:8025'
     networks:
       eventos:
         ipv4_address: 30.10.10.42
+
+  redis:
+    image: redis:7.0.12
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - ./cache:/data:rw
+    networks:
+      eventos:
+        ipv4_address: 30.10.10.41
 
 networks:
   eventos:
