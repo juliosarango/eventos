@@ -7,7 +7,7 @@ from django.contrib.auth.tokens import default_token_generator
 
 from utils.enums import TipoEmail
 from taskapp.task import send_email_for_user
-from .forms import SignupForm
+from .forms import SignupForm, UpdateForm
 
 User = get_user_model()
 
@@ -19,12 +19,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             if user:
-                print("aqqquiuuuuuiiiiiiiiiiiiiiiiiiiiiiiiiiii")
                 send_email_for_user.apply_async(
                     args=(user.id, "REGISTRO_EXITOSO"),
                     countdown=3,
                 )
-                print("luegpoooooooooooooooooooo")
 
             return redirect("users:login")
 
@@ -105,4 +103,20 @@ def activar_usuario(request, uidb64, token):
         request,
         "users/user_action.html",
         {"message": message},
+    )
+
+
+@login_required
+def update_user(request):
+    form = UpdateForm()
+    if request.method == "POST":
+        form = UpdateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("users:home")
+
+    return render(
+        request,
+        "users/update.html",
+        {"form": form},
     )

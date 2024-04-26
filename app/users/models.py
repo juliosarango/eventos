@@ -54,7 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # from `AbstractUser`
     first_name = models.CharField(
         _("first name"),
-        max_length=30,
+        max_length=150,
         blank=True,
     )
     last_name = models.CharField(
@@ -76,24 +76,10 @@ class User(AbstractBaseUser, PermissionsMixin):
             "of deleting accounts."
         ),
     )
-    nombres = models.CharField(
-        default="",
-        max_length=200,
-        blank=True,
-    )
-    apellidos = models.CharField(
-        default="",
-        max_length=200,
-        blank=True,
-    )
+
     telefono = models.CharField(
         default="",
         max_length=50,
-        blank=True,
-    )
-    apellidos = models.CharField(
-        default="",
-        max_length=200,
         blank=True,
     )
 

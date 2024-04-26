@@ -3,6 +3,8 @@ from django.db import models
 from django.conf import settings
 import uuid
 
+from utils.enums import EstadoBoleto
+
 
 class TipoEvento(models.Model):
     nombre = models.CharField(max_length=100, null=False)
@@ -114,8 +116,71 @@ class Boletos(models.Model):
         help_text="Fecha registro",
     )
 
+    vendedor = models.ForeignKey(
+        Vendedor,
+        on_delete=models.CASCADE,
+        null=False,
+    )
+    estado = models.CharField(
+        max_length=20,
+        default=EstadoBoleto.ASIGNADO,
+    )
+
+    fecha_venta = models.DateTimeField(
+        "fecha venta",
+        null=True,
+        blank=True,
+        help_text="Fecha venta",
+    )
+
+    usuario = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=False,
+    )
+
     class Meta:
         verbose_name = "Boleto"
         verbose_name_plural = "Boletos"
         ordering = ["id"]
         db_table = "boletos"
+
+
+# class VendedorBoletos(models.Model):
+#     boleto = models.ForeignKey(
+#         Boletos,
+#         on_delete=models.CASCADE,
+#         null=False,
+#     )
+#     vendedor = models.ForeignKey(
+#         Vendedor,
+#         on_delete=models.CASCADE,
+#         null=False,
+#     )
+#     estado = models.CharField(
+#         max_length=20,
+#         default=EstadoBoleto.ASIGNADO,
+#     )
+
+#     fecha_registro = models.DateTimeField(
+#         "fecha registro",
+#         null=False,
+#         auto_now_add=True,
+#         help_text="Fecha registro",
+#     )
+
+#     usuario = models.ForeignKey(
+#         settings.AUTH_USER_MODEL,
+#         on_delete=models.CASCADE,
+#         null=False,
+#     )
+
+#     class Meta:
+#         verbose_name = "Vendedor-Boleto"
+#         verbose_name_plural = "Vendor-Boletos"
+#         ordering = ["id"]
+#         db_table = "vendedor_boletos"
+
+
+# class Parametro(models.Model):
+#     nombre

@@ -29,4 +29,9 @@ urlpatterns = [
         views.activar_usuario,
         name="activate",
     ),
+    path(
+        "update/<id>",
+        views.update_user,
+        name="update",
+    ),
 ]

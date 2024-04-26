@@ -34,6 +34,6 @@
 <h2>Boletos</h2>
 <ul>
     {% for boleto in boletos %}
-        <li>{{boleto.numero}} - {{ boleto.estado }}</li>
+        <li>{{boleto.numero}} - {{ boleto.estado }} {{boleto.vendedor.usuario.email}}</li>
     {% endfor %}
     </ul>

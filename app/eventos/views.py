@@ -43,11 +43,7 @@ class DetalleEvento(LoginRequiredMixin, ListView):
                 )
 
         eventos = Evento.objects.filter(usuario=user)
-        return render(
-            request,
-            "evento/index.html",
-            context={"eventos": eventos},
-        )
+        return redirect("eventos:index-eventos")
 
 
 class CrearEvento(LoginRequiredMixin, CreateView):
@@ -70,7 +66,20 @@ class CrearEvento(LoginRequiredMixin, CreateView):
             evento.save()
 
             if estado_publicacion:
-                Utils.asignar_vendedor(self, evento=evento, usuario=user)
-                Utils.generar_boletos(self, evento=evento, cantidad=cantidad_boletos)
+                vendedor = Utils.asignar_vendedor(self, evento=evento, usuario=user)
+                Utils.generar_boletos(
+                    self,
+                    evento=evento,
+                    cantidad=cantidad_boletos,
+                    vendedor=vendedor,
+                    usuario=user,
+                )
+                # Utils.asignar_boletos_vendedor(
+                #     self,
+                #     vendedor=user,
+                #     evento=evento,
+                #     usuario=user,
+                #     rango=[1, cantidad_boletos],
+                # )
 
         return render(request, self.template_name, context)

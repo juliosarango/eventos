@@ -17,3 +17,9 @@ class TipoEmail(AutoName):
     POSTULACION_APROBADA_CONSOLIDADO = auto()
     POSTULACION_ENESPERA_INDIVIDUAL = auto()
     POSTULACION_ENESPERA_CONSOLIDADO = auto()
+    
+    
+class EstadoBoleto(AutoName):
+    ASIGNADO = auto()
+    RESERVADO = auto()
+    VENDIDO = auto()

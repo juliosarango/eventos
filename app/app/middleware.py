@@ -13,6 +13,6 @@ class UsuarioMiddleware:
             not request.user.is_anonymous
             and not request.user.is_staff
             and not request.user.datos_actualizados
-            and request.path
+            and request.path not in [reverse("users:logout")]
         ):
-            pass
+            redirect("users:update", id=request.user.id)
