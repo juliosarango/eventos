@@ -5,7 +5,7 @@ from django.db.models import Q
 
 from .forms import EventoForm
 from utils.utils import Utils
-from .models import Evento, Vendedor, Boletos
+from .models import Evento, Boletos
 
 
 class ListarEvento(LoginRequiredMixin, ListView):
@@ -26,23 +26,22 @@ class DetalleEvento(LoginRequiredMixin, ListView):
         user = request.user
         reference = kwargs["reference"]
         evento = Evento.objects.get(Q(usuario=user), Q(reference=reference))
-        vendedores = Vendedor()
+        vendedores = Boletos.objects.order_by("vendedor").distinct("vendedor")
+        print(vendedores)
         boletos = Boletos()
-        if evento:
-            vendedores = Vendedor.objects.filter(evento=evento)
+        if evento:            
             boletos = Boletos.objects.filter(evento=evento)
-            if vendedores and boletos:
+            if boletos:
                 return render(
                     request,
                     "evento/detalle.html",
                     context={
-                        "evento": evento,
-                        "vendedores": vendedores,
+                        "evento": evento,                        
                         "boletos": boletos,
+                        "vendedores": vendedores
                     },
                 )
-
-        eventos = Evento.objects.filter(usuario=user)
+        
         return redirect("eventos:index-eventos")
 
 
@@ -65,21 +64,13 @@ class CrearEvento(LoginRequiredMixin, CreateView):
             evento.usuario = user
             evento.save()
 
-            if estado_publicacion:
-                vendedor = Utils.asignar_vendedor(self, evento=evento, usuario=user)
+            if estado_publicacion:                
                 Utils.generar_boletos(
                     self,
                     evento=evento,
                     cantidad=cantidad_boletos,
-                    vendedor=vendedor,
-                    usuario=user,
-                )
-                # Utils.asignar_boletos_vendedor(
-                #     self,
-                #     vendedor=user,
-                #     evento=evento,
-                #     usuario=user,
-                #     rango=[1, cantidad_boletos],
-                # )
+                    vendedor=user,
+                    usuario=user.id,
+                )                
 
         return render(request, self.template_name, context)

@@ -1,18 +1,9 @@
 from django.db.models import Q
 
-from eventos.models import Boletos, Vendedor
+from eventos.models import Boletos
 
 
-class Utils:
-    def asignar_vendedor(self, evento, usuario):
-
-        vendedor = Vendedor.objects.create(
-            evento=evento,
-            usuario=usuario,
-            estado=True,
-        )
-        vendedor.save()
-        return vendedor
+class Utils:    
 
     def generar_boletos(self, evento, cantidad, vendedor, usuario):
         boleto = Boletos()
@@ -24,24 +15,7 @@ class Utils:
                 usuario=usuario,
             )
 
-        boleto.save()
-
-    # def asignar_boletos_vendedor(self, vendedor, evento, usuario, rango=[]):
-    #     boletos = Boletos.objects.filter(
-    #         evento=evento, numero__gte=rango[0], numero__lte=rango[1]
-    #     )
-    #     vendedor = Vendedor.objects.get(id=vendedor.id)
-    #     vendedor_boletos = VendedorBoletos()
-
-    #     for i in range(0, rango[1]):
-    #         vendedor_boletos = VendedorBoletos.objects.create(
-    #             vendedor=vendedor,
-    #             boleto=boletos[i],
-    #             estado=EstadoBoleto.ASIGNADO,
-    #             usuario=usuario,
-    #         )
-    #     vendedor_boletos.save()
-
+        boleto.save()   
 
 class NotificacionesEmail:
     datos = {

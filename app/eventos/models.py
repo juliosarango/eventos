@@ -76,31 +76,6 @@ class Evento(models.Model):
         db_table = "eventos"
 
 
-class Vendedor(models.Model):
-    evento = models.ForeignKey(
-        Evento,
-        on_delete=models.CASCADE,
-        null=False,
-    )
-    usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        null=False,
-    )
-    estado = estado = models.BooleanField(default=True)
-    fecha_registro = models.DateTimeField(
-        "fecha registro",
-        null=False,
-        auto_now_add=True,
-        help_text="Fecha registro",
-    )
-
-    class Meta:
-        verbose_name = "Vendedor"
-        verbose_name_plural = "Vendedores"
-        ordering = ["id"]
-        db_table = "vendedor"
-
 
 class Boletos(models.Model):
     evento = models.ForeignKey(
@@ -117,10 +92,11 @@ class Boletos(models.Model):
     )
 
     vendedor = models.ForeignKey(
-        Vendedor,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=False,
     )
+    estado_vendedor = models.BooleanField(default=True)
     estado = models.CharField(
         max_length=20,
         default=EstadoBoleto.ASIGNADO,
@@ -133,9 +109,8 @@ class Boletos(models.Model):
         help_text="Fecha venta",
     )
 
-    usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+    usuario = models.PositiveIntegerField(
+        default=0,
         null=False,
     )
 
@@ -144,43 +119,3 @@ class Boletos(models.Model):
         verbose_name_plural = "Boletos"
         ordering = ["id"]
         db_table = "boletos"
-
-
-# class VendedorBoletos(models.Model):
-#     boleto = models.ForeignKey(
-#         Boletos,
-#         on_delete=models.CASCADE,
-#         null=False,
-#     )
-#     vendedor = models.ForeignKey(
-#         Vendedor,
-#         on_delete=models.CASCADE,
-#         null=False,
-#     )
-#     estado = models.CharField(
-#         max_length=20,
-#         default=EstadoBoleto.ASIGNADO,
-#     )
-
-#     fecha_registro = models.DateTimeField(
-#         "fecha registro",
-#         null=False,
-#         auto_now_add=True,
-#         help_text="Fecha registro",
-#     )
-
-#     usuario = models.ForeignKey(
-#         settings.AUTH_USER_MODEL,
-#         on_delete=models.CASCADE,
-#         null=False,
-#     )
-
-#     class Meta:
-#         verbose_name = "Vendedor-Boleto"
-#         verbose_name_plural = "Vendor-Boletos"
-#         ordering = ["id"]
-#         db_table = "vendedor_boletos"
-
-
-# class Parametro(models.Model):
-#     nombre

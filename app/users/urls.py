@@ -30,8 +30,8 @@ urlpatterns = [
         name="activate",
     ),
     path(
-        "update/<id>",
+        "update/<int:pk>/",
         views.update_user,
-        name="update",
+        name="update-profile",
     ),
 ]
