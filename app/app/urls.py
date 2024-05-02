@@ -25,14 +25,14 @@ urlpatterns = [
     path(
         "",
         include(
-            ("users.urls", "users"),
+            ("app.apps.users.urls", "users"),
             namespace="users",
         ),
     ),
     path(
         "eventos/",
         include(
-            ("eventos.urls", "eventos"),
+            ("app.apps.eventos.urls", "eventos"),
             namespace="eventos",
         ),
     ),

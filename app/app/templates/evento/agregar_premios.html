@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add MemberShip</title>
+</head>
+<body>
+    <h1>Add a new MemberShip</h1>
+    <form id="form-container" method="POST">
+        {% csrf_token %}
+        {{premios_formset.management_form}}
+        {% for form in premios_formset %}
+            <div class="premios_formset-form">
+                {{form.as_p}}
+                <input type="hidden" value="1"/>
+                <hr>
+            </div>
+        {% endfor %}
+        <button id="add-form" type="button">Add Another MemberShip</button>
+        <button type="submit">Create MemberShips</button>        
+    </form>
+    </body>
+
+    <script>
+        let membershipForm = document.querySelectorAll(".premios_formset-form")
+        let container = document.querySelector("#form-container")
+        let addButton = document.querySelector("#add-form")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+        let formNum = membershipForm.length-1
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = membershipForm[0].cloneNode(true)
+            let formRegex = RegExp(`form-(\\d){1}-`,'g')
+
+            formNum++
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
+            container.insertBefore(newForm, addButton)
+            
+            totalForms.setAttribute('value', `${formNum+1}`)
+        }
+    </script>
+</html>

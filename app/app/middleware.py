@@ -9,17 +9,22 @@ class UsuarioMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        
+
         if (
             not request.user.is_anonymous
             and not request.user.is_staff
             and not request.user.datos_actualizados
             and request.path not in [reverse("users:logout")]
             and request.path not in [reverse("users:login")]
-            and request.path not in [reverse("users:update")]
+            and request.path
+            not in [
+                reverse(
+                    "users:update",
+                    # args=[request.user.id],
+                )
+            ]
         ):
-            pass
-            #return redirect("users:update-profile", pk=request.user.id)
+            return redirect("users:update")
 
         response = self.get_response(request)
 
